@@ -29,7 +29,7 @@ passport.authenticate(.....)
 
 You simply call this instead...
 ```javascript
-fipassport.authenticate
+fipassport.authenticate(.....)
 ```
 
 Everything else should be the same....
