@@ -12,7 +12,7 @@ There are only two things that are different between using this API and using th
 var express = require('express');
 var passport = require('passport');
 var app = express();
-// ... BOILERPLATEE SETUP CODE GOES HERE ...
+// ... BOILERPLATE SETUP CODE GOES HERE ...
 app.use(passport.initialize());
 app.use(passport.session());
 ```
