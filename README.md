@@ -9,14 +9,18 @@ There are only two things that are different between using this API and using th
 1.)  Instead of calling...
 
 ```javascript
+var express = require('express');
 var passport = require('passport');
+var app = express();
 app.use(passport.initialize());
 app.use(passport.session());
 ```
 
 You simply need to call...
 ```javascript
-var fipassport = require('flatiron-passport');
+var flatiron =      require('flatiron');
+var fipassport =    require('flatiron-passport');
+var app =           flatiron.app;
 app.use(fipassport);
 ```
 
