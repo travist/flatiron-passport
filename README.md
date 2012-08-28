@@ -9,12 +9,12 @@ There are only two things that are different between using this API and using th
 1.)  Instead of calling...
 
 ```javascript
+var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 ```
 
-     You simply need to call...
-
+You simply need to call...
 ```javascript
 var fipassport = require('flatiron-passport');
 app.use(fipassport);
@@ -27,8 +27,7 @@ app.use(fipassport);
 passport.authenticate(.....)
 ```
 
-     You simply call this instead...
-
+You simply call this instead...
 ```javascript
 fipassport.authenticate
 ```
