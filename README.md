@@ -1,8 +1,6 @@
 Passport.js integration for FlatIron web framework.
 ===================================================
 
-IMPORTANT NOTE:  THIS STILL DOESN'T WORK, BUT I AM GETTING CLOSE TO GETTING IT FUNCTIONAL.  DO NOT USE YET!
-
 This package allows [Flatiron.js](http://flatironjs.org) applications to easily use the [Passport.js](http://passportjs.org)
 authentication framework.
 
