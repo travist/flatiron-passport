@@ -8,14 +8,14 @@ There are only two things that are different between using this API and using th
 
 1.)  Instead of calling...
 
-```
+```javascript
 app.use(passport.initialize());
 app.use(passport.session());
 ```
 
      You simply need to call...
 
-```
+```javascript
 var fipassport = require('flatiron-passport');
 app.use(fipassport);
 ```
@@ -23,13 +23,13 @@ app.use(fipassport);
 
 2.)  Instead of calling...
 
-```
+```javascript
 passport.authenticate(.....)
 ```
 
      You simply call this instead...
 
-```
+```javascript
 fipassport.authenticate
 ```
 
@@ -43,7 +43,7 @@ npm install flatiron-passport
 
 Example
 ------------------------
-```
+```javascript
 var flatiron =      require('flatiron');
 var passport =      require('passport');
 var LocalStrategy = require('passport-local').Strategy
