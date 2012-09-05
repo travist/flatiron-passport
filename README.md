@@ -56,11 +56,35 @@ var fipassport =    require('flatiron-passport');
 var app =           flatiron.app;
 
 // Use the passport strategy.
-passport.use(new LocalStrategy(
-  function(username, password, done) {
+passport.use(new LocalStrategy(function(username, password, done) {
 
-    // Use this as you normally would in Passport.js
-  }
+  // Use this as you normally would in Passport.js.
+  // But for now just
+  // hard-code the user object.
+  done(null, {
+    id: 1234,
+    username: username,
+    password: password
+  });
+}});
+
+// Serialize based on the user ID.
+passport.serializeUser(function(user, done) {
+
+  // @todo: Save your user to the database using the ID as a key.
+  done(null, user.id);
+});
+
+// Load the user and return it to passport.
+passport.deserializeUser(function(id, done) {
+
+  // @todo:  Load your user here based off of the ID, and call done with
+  // that user object.
+  done(null, {
+    id:id,
+    username:'foo',
+    password:'bar'
+  });
 });
 
 app.use(flatiron.plugins.http);
