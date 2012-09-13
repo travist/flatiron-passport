@@ -1,4 +1,5 @@
 var passport = require('passport');
+var connect = require('connect');
 
 /**
  * Flatiron Passport integration.
@@ -8,6 +9,13 @@ var passport = require('passport');
 exports.name = 'flatiron-passport';
 exports.attach = function(options) {
   var app = this;
+
+  // Allow them to set a secret.
+  options.secret = options.secret || 'keyboard cat';
+
+  // Add session support.
+  app.http.before.push(connect.cookieParser(options.secret));
+  app.http.before.push(connect.session());
 
   // Initialize passport.
   app.http.before.push(function(req, res) {
