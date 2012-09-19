@@ -1,6 +1,6 @@
 {
   "name": "flatiron-passport",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Passport.js integration into Flatiron web framework.",
   "author": {
     "name": "Travis Tidwell",
