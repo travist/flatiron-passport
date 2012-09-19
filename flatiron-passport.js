@@ -20,6 +20,12 @@ exports.attach = function(options) {
   // Initialize passport.
   app.http.before.push(function(req, res) {
     passport.initialize(options)(req, res, function() {
+
+      // Copy over the authentication methods.
+      req.isAuthenticated = res.req.isAuthenticated;
+      req.isUnauthenticated = res.req.isUnauthenticated;
+      req.login = req.logIn = res.req.login;
+      req.logout = req.logOut = res.req.logout;
       res.emit('next');
     });
   });
@@ -35,14 +41,6 @@ exports.attach = function(options) {
 // Wrap the authenticate function.
 exports.authenticate = function(name, options, callback) {
   return function() {
-
-    // Make sure the login and logout methods are defined.
-    if (!this.req.logIn) {
-      this.req.login = this.req.logIn = this.res.req.login;
-      this.req.logout = this.req.logOut = this.res.req.logOut;
-    }
-
-    // Authenticate.
     passport.authenticate(name, options, callback)(this.req, this.res, (function(self) {
       return function() {
         self.res.emit('next');
