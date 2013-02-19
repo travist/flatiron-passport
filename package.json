@@ -20,7 +20,7 @@
     "passport": ">=0",
     "connect": ">=0",
     "flatiron": ">=0",
-    "union": ">=0.3.4"
+    "union": ">=0.3.6"
   },
   "licenses": [
     {
