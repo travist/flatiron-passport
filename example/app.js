@@ -4,8 +4,18 @@ var LocalStrategy = require('passport-local').Strategy
 var fipassport =    require('flatiron-passport');
 var app =           flatiron.app;
 
+// You would not usually have these lines...
+// This is just to store the username in memory.
+var global_user = '';
+var global_pass = '';
+
 // Use the passport strategy.
 fipassport.use(new LocalStrategy(function(username, password, done) {
+
+  // You would not normally have these lines...
+  // This is just to store it in memory for use later.
+  global_user = username;
+  global_pass = password;
 
   // Use this as you normally would in Passport.js.
   // But for now just
@@ -31,8 +41,8 @@ fipassport.deserializeUser(function(id, done) {
   // that user object.
   done(null, {
     id:id,
-    username:'foo',
-    password:'bar'
+    username:global_user,
+    password:global_pass
   });
 });
 
