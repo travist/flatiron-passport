@@ -48,3 +48,31 @@ exports.authenticate = function(name, options, callback) {
     })(this));
   };
 };
+
+// Wrap the authorize function.
+exports.authorize = function(name, options, callback) {
+  return function() {
+    passport.authorize(name, options, callback)(this.req, this.res, (function(self) {
+      return function() {
+        self.res.emit('next');
+      }
+    })(this));
+  };
+};
+
+// Wrap the use function to pass that along...
+exports.use = function(name, strategy) {
+  return passport.use(name, strategy);
+};
+exports.unuse = function(name) {
+  return passport.unuse(name);
+};
+exports.serializeUser = function(fn, done) {
+  return passport.serializeUser(fn, done);
+};
+exports.deserializeUser = function(fn, done) {
+  return passport.deserializeUser(fn, done);
+};
+exports.transformAuthInfo = function(fn, done) {
+  return passport.transformAuthInfo(fn, done);
+};

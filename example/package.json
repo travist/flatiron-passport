@@ -1,0 +1,17 @@
+{
+  "description": "This is a flatiron-passport application test.",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "flatiron": ">=0.2.8",
+    "flatiron-passport": ">=0",
+    "passport": ">=0",
+    "passport-local": ">=0",
+    "connect": ">=0",
+    "union": ">=0.3.6",
+    "underscore": ">=0"
+  },
+  "name": "flatiron",
+  "author": "Travis Tidwell",
+  "homepage": ""
+}
