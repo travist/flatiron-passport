@@ -2,20 +2,22 @@ var passport = require('passport');
 var connect = require('connect');
 
 /**
- * Flatiron Passport integration.
- *
- * Read README.md for documentation on how to use.
- */
+* Flatiron Passport integration.
+*
+* Read README.md for documentation on how to use.
+*/
 exports.name = 'flatiron-passport';
 exports.attach = function(options) {
   var app = this;
 
-  // Allow them to set a secret.
-  options.secret = options.secret || 'keyboard cat';
+  if (options.session !== false) {
+     // Allow them to set a secret.
+     options.secret = options.secret || 'keyboard cat';
 
-  // Add session support.
-  app.http.before.push(connect.cookieParser(options.secret));
-  app.http.before.push(connect.session());
+     // Add session support.
+     app.http.before.push(connect.cookieParser(options.secret));
+     app.http.before.push(connect.session());
+  }
 
   // Initialize passport.
   app.http.before.push(function(req, res) {
@@ -30,19 +32,25 @@ exports.attach = function(options) {
     });
   });
 
-  // Initialize the session of passport.
-  app.http.before.push(function(req, res) {
-    passport.session()(req, res, function() {
-      res.emit('next');
+  if (options.session !== false) {
+    // Initialize the session of passport.
+    app.http.before.push(function(req, res) {
+      passport.session()(req, res, function() {
+        res.emit('next');
+      });
     });
-  });
+  }
 };
 
 // Wrap the authenticate function.
 exports.authenticate = function(name, options, callback) {
-  return function() {
+  return function(cb) {
+    this.cb = cb;
     passport.authenticate(name, options, callback)(this.req, this.res, (function(self) {
-      return function() {
+      return function(cb) {
+        if (typeof self.cb === 'function') {
+          self.cb();
+        }
         self.res.emit('next');
       }
     })(this));
