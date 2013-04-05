@@ -49,7 +49,7 @@ exports.authenticate = function(name, options, callback) {
     passport.authenticate(name, options, callback)(this.req, this.res, (function(self) {
       return function(cb) {
         if (typeof self.cb === 'function') {
-          self.cb();
+          return self.cb();
         }
         self.res.emit('next');
       }
