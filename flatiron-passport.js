@@ -15,8 +15,8 @@ exports.attach = function(options) {
      options.secret = options.secret || 'keyboard cat';
 
      // Add session support.
-     app.http.before.push(connect.cookieParser(options.secret));
-     app.http.before.push(connect.session());
+     app.http.before.push(connect.cookieParser());
+     app.http.before.push(connect.cookieSession({secret: options.secret, maxAge: 1000 * 60 * 60 * 24 * 30})); //default to 1 month
   }
 
   // Initialize passport.
